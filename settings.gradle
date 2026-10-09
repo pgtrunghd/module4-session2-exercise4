@@ -1,1 +1,3 @@
 rootProject.name = 'module4-session2'
+
+include 'user-service', 'inventory-service'

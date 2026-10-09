@@ -2,10 +2,9 @@ package com.homework.module4session2.service;
 
 import com.homework.module4session2.dto.ProductResponseDTO;
 import com.homework.module4session2.entity.ProductEntity;
+import com.homework.module4session2.exception.ResourceNotFoundException;
 import com.homework.module4session2.repository.ProductRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ProductService {
@@ -18,7 +17,7 @@ public class ProductService {
 
     public ProductResponseDTO getById(Long id) {
         ProductEntity product = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product với ID " + id + " không tồn tại trên hệ thống!"));
         return toResponse(product);
     }
 

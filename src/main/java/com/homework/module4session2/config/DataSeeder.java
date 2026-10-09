@@ -12,12 +12,17 @@ public class DataSeeder {
 
     @Bean
     CommandLineRunner seedProducts(ProductRepository repository) {
-        return args -> repository.save(ProductEntity.builder()
+        return args -> {
+            if (repository.count() > 0) {
+                return;
+            }
+            repository.save(ProductEntity.builder()
                 .name("Ban phim co")
                 .sku("KB-001")
                 .importPrice(new BigDecimal("500000"))
                 .sellPrice(new BigDecimal("750000"))
                 .stockQuantity(100)
                 .build());
+        };
     }
 }
